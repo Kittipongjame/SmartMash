@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SmartMash</string>
+    <string name="title">ระบบควบคุมโรงเพาะเลี้ยงเห็ดแครง</string>
+    <string name="button">Setup</string>
+</resources>
