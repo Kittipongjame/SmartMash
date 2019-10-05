@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">SmartMash</string>
-    <string name="title">ระบบควบคุมโรงเพาะเลี้ยงเห็ดแครง</string>
+    <string name="app_name">MashRoom</string>
+    <string name="title">ตั้งค่าอุณหภูมิและความชื้นเพิ่มเติม</string>
     <string name="button">Setup</string>
+    <string name="button2">กำหนดค่าเพิ่มมเติม</string>
 </resources>

@@ -26,7 +26,7 @@ public class Main2Activity extends AppCompatActivity {
     public String Value,Value1,Value2,Value3;
     private TextView textView,textView1,textView2,textView3,textView4,textView5,textView6;
     public EditText editText1,editText2;
-    MyAlertDialog objMyAlertDialog;
+    MyAlertDialog objMyAlertDialog,objMyAlertDialog2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +89,9 @@ public class Main2Activity extends AppCompatActivity {
                             TEXT1.child("SendTemp").setValue(Value);
                             TEXT2.child("SendHum").setValue(Value1);
 
+                            objMyAlertDialog2 = new MyAlertDialog();
+                            objMyAlertDialog2.EnterdoneDialog(Main2Activity.this);
+
                         }
 
 
@@ -135,15 +138,7 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
-        Switch1 = (Button)findViewById(R.id.button6);
-        Switch1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
-                startActivity(intent);
 
-            }
-        });
 
         Switch2 = (Button)findViewById(R.id.button3);
         Switch2.setOnClickListener(new View.OnClickListener() {
@@ -151,6 +146,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Main2Activity.this,MainActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });

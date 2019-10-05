@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 Value = dataSnapshot.getValue(Integer.class);
                 if (Value==0){
                     textView3.setText("FANS ON");
-
+                    textView3.setTextColor(getColor(R.color.color_ON));
                 }else {
                     textView3.setText("FANS OFF");
-
+                    textView3.setTextColor(getColor(R.color.color_MANUAL));
                 }
 
 
@@ -111,10 +111,10 @@ public class MainActivity extends AppCompatActivity {
                 Value1 = dataSnapshot.getValue(Integer.class);
                 if (Value1==0){
                     textView4.setText("PUMP ON");
-
+                    textView4.setTextColor(getColor(R.color.color_ON));
                 }else {
                     textView4.setText("PUMP OFF");
-
+                    textView4.setTextColor(getColor(R.color.color_MANUAL));
                 }
 
 
@@ -134,10 +134,10 @@ public class MainActivity extends AppCompatActivity {
                 Value2 = dataSnapshot.getValue(Integer.class);
                 if (Value2==0){
                     textView5.setText("VALVE ON");
-
+                    textView5.setTextColor(getColor(R.color.color_ON));
                 }else {
                     textView5.setText("VALVE OFF");
-
+                    textView5.setTextColor(getColor(R.color.color_MANUAL));
                 }
 
 
@@ -157,9 +157,10 @@ public class MainActivity extends AppCompatActivity {
                 Value3 = dataSnapshot.getValue(Integer.class);
                 if (Value3==0){
                     textView6.setText(" ON ");
-
+                    textView6.setTextColor(getColor(R.color.color_ON));
                 }else {
                     textView6.setText(" OFF ");
+                    textView6.setTextColor(getColor(R.color.color_MANUAL));
 
                 }
 
@@ -177,38 +178,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Main2Activity.class);
                startActivity(intent);
+                finish();
 
             }
         });
-        MODE = firebaseDatabase.getReference("Status/MODE");
-        Switch2 = (Button) findViewById(R.id.button);
-        MODE.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Value = dataSnapshot.getValue(Integer.class);
-                Log.d(TAG, "Value is: " + Value);
-                if (Value==1){
-                    Switch2.setText("AUTO");
-                    Switch2.setBackgroundResource(R.color.color_AUTO);
-                    Value_refer1 = 0;
-
-                }else {
-                    Switch2.setText("MANUAL");
-                    Switch2.setBackgroundResource(R.color.color_MANUAL);
-                    Value_refer1 = 1;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+        Switch2 = (Button)findViewById(R.id.button6);
         Switch2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                MODE.setValue(Value_refer1);
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Main5Activity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
+
     }
 }

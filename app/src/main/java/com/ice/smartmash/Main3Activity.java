@@ -1,5 +1,6 @@
 package com.ice.smartmash;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,13 +17,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Map;
+
 public class Main3Activity extends AppCompatActivity {
     public FirebaseDatabase firebaseDatabase;
-    public DatabaseReference SW1,SW2,SW3,SW4,SW5,SW6;
+    public DatabaseReference SW1,SW2,SW3,SW4,SW5,SW6,TEXT,TEXT1,TEXT2,TEXT3,TEXT4,TEXT5,TEXT6;
     private static final String TAG = "LEDs Control";
     public Button button1,Switch1,button2,Switch2,Switch3,Switch4,Switch5;
-    public Integer Value1,Value2,Value3,Value4,Value_refer1,Value_refer2,Value_refer3,Value_refer4,Value_refer5;
-//    private TextView textView,textView1,textView2,textView3,textView4,textView5,textView6;
+    public Integer Value,Value1,Value2,Value3,Value4,Value_refer1,Value_refer2,Value_refer3,Value_refer4,Value_refer5;
+   private TextView textView,textView1,textView2,textView3,textView4,textView5,textView6;
 //    public EditText editText1,editText2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,11 +155,158 @@ public class Main3Activity extends AppCompatActivity {
         Switch5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main3Activity.this,Main2Activity.class);
+                Intent intent = new Intent(Main3Activity.this,Main5Activity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        TEXT = firebaseDatabase.getReference();
+        textView = (TextView)findViewById(R.id.textView16);
+        TEXT.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map map = (Map) dataSnapshot.getValue();
+                String tx1 = String.valueOf(map.get("Humidity"));
+                textView.setText(tx1);
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+        TEXT1 = firebaseDatabase.getReference();
+        textView1 = (TextView)findViewById(R.id.textView8);
+        TEXT1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map map = (Map) dataSnapshot.getValue();
+                String tx2 = String.valueOf(map.get("Temperature"));
+                textView1.setText(tx2);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        TEXT2 = firebaseDatabase.getReference();
+        textView2 = (TextView)findViewById(R.id.textView3);
+        TEXT2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map map = (Map) dataSnapshot.getValue();
+                String tx3 = String.valueOf(map.get("Ultrasonic"));
+                textView2.setText(tx3);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*----------------------------------------*/
+        TEXT3 = firebaseDatabase.getReference("Status/Fans");
+        textView3 = (TextView)findViewById(R.id.textView5);
+        TEXT3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Map map = (Map) dataSnapshot.getValue();
+                Value = dataSnapshot.getValue(Integer.class);
+                if (Value==0){
+                    textView3.setText("FANS ON");
+                    textView3.setTextColor(getColor(R.color.color_ON));
+
+                }else {
+                    textView3.setText("FANS OFF");
+                    textView3.setTextColor(getColor(R.color.color_MANUAL));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        TEXT4 = firebaseDatabase.getReference("Status/Pump");
+        textView4 = (TextView)findViewById(R.id.textView12);
+        TEXT4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Map map = (Map) dataSnapshot.getValue();
+                Value1 = dataSnapshot.getValue(Integer.class);
+                if (Value1==0){
+                    textView4.setText("PUMP ON");
+                    textView4.setTextColor(getColor(R.color.color_ON));
+
+                }else {
+                    textView4.setText("PUMP OFF");
+                    textView4.setTextColor(getColor(R.color.color_MANUAL));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        TEXT5 = firebaseDatabase.getReference("Status/SolenoidValve");
+        textView5 = (TextView)findViewById(R.id.textView14);
+        TEXT5.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Map map = (Map) dataSnapshot.getValue();
+                Value2 = dataSnapshot.getValue(Integer.class);
+                if (Value2==0){
+                    textView5.setText("VALVE ON");
+                    textView5.setTextColor(getColor(R.color.color_ON));
+
+                }else {
+                    textView5.setText("VALVE OFF");
+                    textView5.setTextColor(getColor(R.color.color_MANUAL));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        TEXT6 = firebaseDatabase.getReference("Status/ice");
+        textView6 = (TextView)findViewById(R.id.textView13);
+        TEXT6.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Map map = (Map) dataSnapshot.getValue();
+                Value3 = dataSnapshot.getValue(Integer.class);
+                if (Value3==0){
+                    textView6.setText(" ON ");
+                    textView6.setTextColor(getColor(R.color.color_ON));
+
+                }else {
+                    textView6.setText(" OFF ");
+                    textView6.setTextColor(getColor(R.color.color_MANUAL));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
     }
 }
